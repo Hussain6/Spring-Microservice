@@ -10,18 +10,14 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.eazybytes.accounts.dto.ErrorResponseDto;
 
-
-
 @ControllerAdvice
 public class GlobalExceptionHandler {
-	    public ResponseEntity<ErrorResponseDto> handleCustomerAlreadyExistsException(CustomerAlreadyExisitsException exception,
-	                                                                                 WebRequest webRequest){
-	        ErrorResponseDto errorResponseDTO = new ErrorResponseDto(
-	                webRequest.getDescription(false),
-	                HttpStatus.BAD_REQUEST,
-	                exception.getMessage(),
-	                LocalDateTime.now()
-	        );
-	        return new ResponseEntity<>(errorResponseDTO, HttpStatus.BAD_REQUEST);
-	    }
+	
+    @ExceptionHandler(CustomerAlreadyExisitsException.class)
+	public ResponseEntity<ErrorResponseDto> handleCustomerAlreadyExistsException(
+			CustomerAlreadyExisitsException exception, WebRequest webRequest) {
+		ErrorResponseDto errorResponseDTO = new ErrorResponseDto(webRequest.getDescription(false),
+				HttpStatus.BAD_REQUEST, exception.getMessage(), LocalDateTime.now());
+		return new ResponseEntity<>(errorResponseDTO, HttpStatus.BAD_REQUEST);
+	}
 }

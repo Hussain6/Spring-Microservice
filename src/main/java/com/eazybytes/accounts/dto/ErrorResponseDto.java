@@ -6,12 +6,13 @@ import org.springframework.http.HttpStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@AllArgsConstructor @NoArgsConstructor
 public class ErrorResponseDto {
 	private String apiPath;
 	private HttpStatus errorCode;
-	private HttpStatus errorMessage;
+	private String errorMessage;
 	private LocalDateTime errorTime;
 }
