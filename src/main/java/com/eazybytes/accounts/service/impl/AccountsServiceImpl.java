@@ -6,7 +6,7 @@ import java.util.Random;
 
 import org.springframework.stereotype.Service;
 
-import com.eazybytes.accounts.contants.AccountsContants;
+import com.eazybytes.accounts.contants.AccountsConstants;
 import com.eazybytes.accounts.dto.AccountsDto;
 import com.eazybytes.accounts.dto.CustomerDto;
 import com.eazybytes.accounts.entity.Accounts;
@@ -36,8 +36,6 @@ public class AccountsServiceImpl implements IAccountsService {
 			throw new CustomerAlreadyExisitsException(
 					"Customer Already Exist with same phone number" + customerDto.getMobileNumber());
 		}
-		customer.setCreatedAt(LocalDateTime.now());
-		customer.setCreatedBy("Admin");
 
 		Customer savedCustomer = customerRepository.save(customer);
 		accountsRepository.save(createNewAccount(savedCustomer));
@@ -49,10 +47,9 @@ public class AccountsServiceImpl implements IAccountsService {
 		long randomAccNumber = 1000000000L + new Random().nextInt(900000000);
 
 		newAccount.setAccountNumber(randomAccNumber);
-		newAccount.setAccountType(AccountsContants.SAVINGS);
-		newAccount.setBranchAddress(AccountsContants.ADDRESS);
-		newAccount.setCreatedAt(LocalDateTime.now());
-		newAccount.setCreatedBy("Admin");
+		newAccount.setAccountType(AccountsConstants.SAVINGS);
+		newAccount.setBranchAddress(AccountsConstants.ADDRESS);
+
 		return newAccount;
 	}
 
